@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import Screens from './navigation';
+import {HomeScreen} from './screens/HomeScreen';
+
 export default function App() {
   return (
-    <View style={{flex: 1}}>
-      <Screens />
+    <View>
+      <HomeScreen />
     </View>
   );
 }

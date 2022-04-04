@@ -2,20 +2,23 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
 import React, {FC, useMemo} from 'react';
 import {Text, View} from 'react-native';
-
 import createStyles from './styles';
+import Icon from 'react-native-vector-icons/Feather';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import Header from '../../components/home/Header';
+import Stories from '../../components/home/Stories';
+import Post from '../../components/home/Post';
 
-interface IProps {
-  navigation: NavigationProp<ParamListBase>;
-}
-const Tab = createBottomTabNavigator();
-const HomeScreen: FC<IProps> = ({navigation}) => {
-  const styles = useMemo(() => createStyles(), []);
+export const HomeScreen = () => {
   return (
-    <View style={styles.body}>
-      <Text style={styles.text}>HomeScreen</Text>
-    </View>
+    <>
+      <View>
+        <Header />
+        <Stories />
+        <ScrollView>
+          <Post />
+        </ScrollView>
+      </View>
+    </>
   );
 };
-
-export default HomeScreen;

@@ -4,15 +4,9 @@ import {RFValue} from 'react-native-responsive-fontsize';
 
 const createStyles = () =>
   StyleSheet.create({
-    body: {
+    container: {
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    text: {
-      fontSize: RFValue(25),
-      fontWeight: '300',
-      color: Colors.BLACK,
+      backgroundColor: Colors.GREEN_DARK_6,
     },
   });
 
