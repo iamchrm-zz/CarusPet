@@ -4,8 +4,11 @@ import Camera from 'react-native-vector-icons/Feather';
 import Notify from 'react-native-vector-icons/Ionicons';
 import Message from 'react-native-vector-icons/Feather';
 import {Colors} from '../../assets/images/constants/colors';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../../navigations/Navigations';
 
 export default function Header() {
+  const navigation = useNavigation<RootStackParamList>();
   return (
     <View style={styles.container}>
       <View style={styles.iconsLeft}>
@@ -21,9 +24,10 @@ export default function Header() {
           <Notify name="notifications-outline" style={styles.logo} />
         </TouchableOpacity>
         <TouchableOpacity>
-          <Message name="message-circle" style={styles.logo} />
+          <Message name="message-circle" style={styles.logo} onPress={() => navigation.navigate('ChatScreen')} />
         </TouchableOpacity>
       </View>
+      
     </View>
   );
 }

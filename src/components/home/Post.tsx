@@ -1,17 +1,21 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Animated,
-} from 'react-native';
-import React from 'react';
-import VerticalIcon from 'react-native-vector-icons/Feather';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import React, {useRef, useState} from 'react';
+import ColumnIcons from 'react-native-vector-icons/Ionicons';
 import {POSTS} from '../../data/data';
 import {Colors} from '../../assets/images/constants/colors';
 
 const Post = () => {
+  const [liked, setLiked] = useState(false);
+
+  const likedPostById = (id: any) => {
+   POSTS.find((post: any) => {
+      if (post.id === id) {
+        setLiked(!liked);
+      }
+    }
+    );
+  };
+
   return (
     <>
       {POSTS.map(({description, id, image, likes, user, date}) => (
@@ -23,7 +27,7 @@ const Post = () => {
           </View>
 
           <View>
-            <View style={styles.body}>
+            <View>
               <View style={styles.header}>
                 <Text> {description}</Text>
               </View>
@@ -36,26 +40,49 @@ const Post = () => {
             </View>
 
             <View style={styles.footer}>
-              <View>
-                <Image source={{uri: image}} style={styles.story} />
-              </View>
               <View style={styles.users}>
-                <Text>{user}</Text>
-                <Text>{date}</Text>
+                <Image source={{uri: image}} style={styles.story} />
+                <View
+                  style={{
+                    flex: 2,
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    flexDirection: 'column',
+                    marginLeft: 10,
+                    alignContent: 'center',
+                  }}>
+                  <Text>{user}</Text>
+                  <Text>{date}</Text>
+                </View>
               </View>
+
               <View style={styles.iconsBottom}>
-                <TouchableOpacity>
-                  <VerticalIcon name="heart" size={35} color={Colors.BLACK} />
+                <TouchableOpacity style={styles.separacion} onPress={() => likedPostById(id)}>
+                  {liked ? (
+                    <ColumnIcons
+                      name="heart"
+                      size={35}
+                      style={{color: Colors.BLACK}}
+                      color={Colors.BLACK}
+                    />
+                  ) : (
+                    <ColumnIcons
+                      name="heart-outline"
+                      size={35}
+                      style={{color: Colors.BLACK}}
+                      color={Colors.BLACK}
+                    />
+                  )}
                 </TouchableOpacity>
-                <TouchableOpacity>
-                  <VerticalIcon
-                    name="message-square"
+                <TouchableOpacity style={styles.separacion}>
+                  <ColumnIcons
+                    name="chatbox-outline"
                     size={35}
                     color={Colors.BLACK}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity>
-                  <VerticalIcon name="share" size={35} color={Colors.BLACK} />
+                <TouchableOpacity style={styles.separacion}>
+                  <ColumnIcons name="share" size={35} color={Colors.BLACK} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -67,21 +94,32 @@ const Post = () => {
 };
 
 const styles = StyleSheet.create({
-  iconsBottom: {
-    flexDirection: 'row',
-
-    marginTop: 15,
-  },
-  users: {
-    marginLeft: 10,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    paddingRight: 100,
-  },
   footer: {
     display: 'flex',
     flexDirection: 'row',
-    paddingTop: 10,
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingTop: 20,
+    width: '100%',
+  },
+  users: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  separacion: {
+    marginLeft: 10,
+  },
+
+  iconsBottom: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '20%',
+    justifyContent: 'flex-end',
   },
   container: {
     justifyContent: 'center',
@@ -105,14 +143,13 @@ const styles = StyleSheet.create({
     elevation: 12,
   },
   story: {
-    width: 70,
-    height: 70,
+    width: 50,
+    height: 50,
     borderRadius: 50,
-    marginLeft: 10,
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: '#ff8501',
   },
-  body: {},
+
   header: {
     justifyContent: 'center',
     alignItems: 'center',

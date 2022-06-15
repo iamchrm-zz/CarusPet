@@ -1,11 +1,8 @@
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import {View, Text} from 'react-native';
-import {HomeScreen} from './screens/HomeScreen';
+import Navigations from './navigations/Navigations';
 
 export default function App() {
-  return (
-    <View>
-      <HomeScreen />
-    </View>
-  );
+  return <Navigations />;
 }

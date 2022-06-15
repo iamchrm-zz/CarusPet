@@ -1,20 +1,18 @@
-import { NavigationProp, ParamListBase } from '@react-navigation/native'
-import React, { FC, useMemo } from 'react'
-import { Text, View } from 'react-native'
-import createStyles from './styles'
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
+import React, {FC, useMemo} from 'react';
+import {Text, View} from 'react-native';
+import ChatBody from '../../components/chat/ChatBody';
+import ChatHeader from '../../components/chat/ChatHeader';
+import ChatStories from '../../components/chat/ChatStories';
 
-interface IProps{
-    navigation: NavigationProp<ParamListBase>
-}
-const ChatScreen: FC<IProps> = ({ navigation }) => {
-    const styles = useMemo(() => createStyles(), [])
-    return (
-        <View style={styles.body}>
-            <Text style={styles.text}>ChatScreen</Text>
-        </View>
-    )
-}
+const ChatScreen = () => {
+  return (
+    <View>
+      <ChatHeader />
+      <ChatStories />
+      <ChatBody/>
+    </View>
+  );
+};
 
-export default ChatScreen
-
-
+export default ChatScreen;
